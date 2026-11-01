@@ -1,10 +1,10 @@
-const CACHE_NAME = "adonis-shell-v2";
+const CACHE_NAME = "adonis-shell-v3";
 const APP_BASE = "/project-adonis/";
 const CORE_ASSETS = [
   APP_BASE,
   APP_BASE + "index.html",
   APP_BASE + "manifest.webmanifest",
-  APP_BASE + "icon.svg"
+  APP_BASE + "icon-v2.svg"
 ];
 
 self.addEventListener("install", event => {
