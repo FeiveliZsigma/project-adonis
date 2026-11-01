@@ -1,0 +1,19 @@
+{
+  "id": "/project-adonis/",
+  "name": "ADONIS — 75 Day Upgrade",
+  "short_name": "ADONIS",
+  "description": "Build discipline, confidence, and consistency.",
+  "start_url": "/project-adonis/",
+  "scope": "/project-adonis/",
+  "display": "standalone",
+  "background_color": "#0b100e",
+  "theme_color": "#0b100e",
+  "icons": [
+    {
+      "src": "/project-adonis/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
