@@ -27,7 +27,8 @@ const habits: Habit[] = [
   {id:"journal",label:"Write tomorrow’s goals and gratitude",category:"Reflection",time:"Before bed"},
   {id:"social-limit",label:"Keep social media within my limit",category:"Focus",time:"Daily"},
   {id:"morning-phone",label:"No social media during my first hour",category:"Focus",time:"Morning"},
-  {id:"no-snooze",label:"Get up without snoozing",category:"Discipline",time:"Morning"}
+  {id:"no-snooze",label:"Get up without snoozing",category:"Discipline",time:"Morning"},
+  {id:"morning-goals",label:"Write today’s goals on paper",category:"Discipline",time:"After waking up"}
 ];
 const nav = [{id:"overview",label:"Overview",icon:Home},{id:"journey",label:"75-day journey",icon:Target},{id:"habits",label:"Habit tracker",icon:Check},{id:"study",label:"Study room",icon:BookOpen},{id:"fitness",label:"Fitness & soccer",icon:Dumbbell},{id:"recipes",label:"Food & recipes",icon:Utensils},{id:"reflection",label:"Daily reflection",icon:Heart},{id:"motivation",label:"Motivation",icon:Trophy}];
 const todayISO = () => new Date().toLocaleDateString("en-CA");
