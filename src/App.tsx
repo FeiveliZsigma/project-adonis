@@ -13,6 +13,7 @@ const habits: Habit[] = [
   {id:"study",label:"Complete a focused study block",category:"Study",time:"After school"},
   {id:"movement",label:"Gym or soccer session",category:"Fitness",time:"Planned session"},
   {id:"water",label:"Drink water regularly",category:"Health",time:"All day"},
+  {id:"supplement-plan",label:"Follow my approved supplement plan (if any)",category:"Health",time:"Only as directed"},
   {id:"teeth",label:"Brush and aligner care",category:"Grooming",time:"Morning + night"},
   {id:"reset",label:"Prepare for tomorrow",category:"Discipline",time:"Evening"},
   {id:"sleep",label:"Get ready for bed by 9 PM",category:"Recovery",time:"9:00 PM"},
