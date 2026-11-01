@@ -50,3 +50,18 @@
 
 /* Weight-based chicken nutrition estimator */
 .nutrition-estimator{margin:16px 0;padding:16px;background:#111e15;border:1px solid #354b39;border-radius:10px}.nutrition-estimator .recipe-section-title{margin-bottom:8px}.nutrition-estimator .recipe-section-title>span{font-size:9px;color:#a8d9af}.nutrition-weight-label{display:grid;gap:6px;margin:12px 0;color:#c8d8cb;font-size:10px}.nutrition-weight-label input{width:100%;max-width:240px;padding:10px 12px;border:1px solid #405646;border-radius:7px;background:#0b130e;color:#f1f7f1;font:inherit;font-size:13px}.nutrition-toggle{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.nutrition-toggle button{padding:8px 12px;border:1px solid #405646;border-radius:7px;background:#17251b;color:#c6d5c8;font-size:9px;cursor:pointer}.nutrition-toggle button.selected{background:#b7e5bd;color:#132017;border-color:#b7e5bd}.nutrition-results{margin-top:12px}.nutrition-result-main{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:#1a2b1e;border-radius:8px;color:#cbd9cd}.nutrition-result-main small,.nutrition-result-grid small{font-size:9px;color:#9eafa1}.nutrition-result-main b{font-size:15px;color:#c3edc9}.nutrition-result-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:8px 0}.nutrition-result-grid>div{display:grid;gap:5px;padding:10px 8px;background:#17251b;border:1px solid #304534;border-radius:7px}.nutrition-result-grid b{font-size:12px;color:#edf5ee}.nutrition-results>p{line-height:1.65;margin-top:10px}@media(max-width:480px){.nutrition-result-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.nutrition-section{overflow:hidden}
+.nutrition-table{width:100%;overflow-x:auto;margin-top:12px}
+.nutrition-head,.nutrition-row{display:grid;grid-template-columns:minmax(145px,2fr) 76px 62px 65px 60px 55px;gap:8px;align-items:center;min-width:540px}
+.nutrition-head{padding:8px 7px;color:#91a596;font-size:8px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid #354739}
+.nutrition-row{padding:10px 7px;border-bottom:1px solid #26372b;font-size:10px;color:#d4e0d6}
+.nutrition-name{display:grid;gap:4px;line-height:1.4}
+.nutrition-name small{font-size:8px;color:#8e9d91}
+.nutrition-row input{width:100%;min-width:0;padding:7px 5px;border:1px solid #405745;border-radius:6px;background:#101a13;color:#eef7ef;font:inherit}
+.nutrition-row input:focus{outline:1px solid #a6e3b3;border-color:#a6e3b3}
+.nutrition-total{display:flex;flex-wrap:wrap;align-items:center;gap:9px 14px;padding:13px;margin-top:12px;border:1px solid #3d5942;background:#142219;border-radius:9px;color:#cbdacc;font-size:9px}
+.nutrition-total b{margin-right:auto}
+.nutrition-total strong{font-size:13px;color:#b9edc2}
+.nutrition-total span{color:#a9bcae}
+@media(max-width:600px){.nutrition-total{gap:8px}.nutrition-total b{width:100%}}
