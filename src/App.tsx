@@ -19,6 +19,8 @@ const habits: Habit[] = [
   {id:"sleep",label:"Get ready for bed by 9 PM",category:"Recovery",time:"9:00 PM"},
   {id:"deep-work",label:"Complete one hour of deep work",category:"Study",time:"Daily"},
   {id:"skill",label:"Learn a skill for 10 minutes",category:"Growth",time:"Daily"},
+  {id:"fusion360",label:"Learn Fusion 360",category:"Engineering",time:"15 minutes daily"},
+  {id:"esp32-code",label:"Practise ESP32 coding",category:"Coding",time:"15 minutes daily"},
   {id:"walk",label:"Take a 10-minute outdoor walk",category:"Health",time:"Daily"},
   {id:"quiet",label:"Take 10–20 minutes without screens or music",category:"Recovery",time:"Daily"},
   {id:"reading",label:"Read 10 pages",category:"Growth",time:"Daily"},
