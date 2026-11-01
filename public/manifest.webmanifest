@@ -6,8 +6,8 @@
   "start_url": "/project-adonis/",
   "scope": "/project-adonis/",
   "display": "standalone",
-  "background_color": "#0b100e",
-  "theme_color": "#0b100e",
+  "background_color": "#080808",
+  "theme_color": "#080808",
   "icons": [
     {
       "src": "/project-adonis/icon.svg",
