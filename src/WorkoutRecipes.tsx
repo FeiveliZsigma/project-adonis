@@ -18,6 +18,36 @@ const recipes = [
  {name:"Yogurt crunch bowl",category:"Breakfast & snack",time:"5 min",prep:"5 min",cook:"None",servings:"1 bowl",level:"Easy",description:"A quick bowl with creamy yogurt, crunchy granola and fresh fruit.",ingredients:["¾ cup (about 175 g) plain yogurt or Greek yogurt","¼ cup granola or muesli","½ apple, chopped, or ½ cup berries","1 tsp dark chocolate pieces, optional","A pinch of cinnamon, optional"],equipment:["Bowl","Spoon","Knife and cutting board"],steps:["Spoon the yogurt into a bowl and spread it evenly.","Wash the fruit. Chop the apple into small bite-sized pieces, or rinse and drain the berries.","Scatter the granola over the yogurt.","Add the fruit and optional dark chocolate or cinnamon.","Serve immediately so the granola stays crunchy."],tips:["Add granola just before eating to keep its crunch.","Use fruit that is in season or whatever you already have.","If preparing ahead, pack the granola separately and add it at serving time."]},
  {name:"Peach yogurt drink",category:"Breakfast & snack",time:"5 min + chilling",prep:"5 min",cook:"None",servings:"About 2 glasses",level:"Easy",description:"A smooth, fruity yogurt drink made with peaches, milk and vanilla.",ingredients:["1 cup canned peach slices, drained","1 cup plain yogurt","½ cup milk, plus more to thin","¼ tsp vanilla extract","1 tsp honey, optional"],equipment:["Blender","Measuring cup","Lidded jug or container"],steps:["Drain the peaches. If they are packed in syrup, a quick rinse can reduce some of the extra syrup.","Add peaches, yogurt, milk and vanilla to the blender.","Blend until smooth, stopping to scrape down the sides if needed.","Add more milk a little at a time until it reaches a drinkable consistency.","Taste and add a little honey only if needed. Blend briefly to combine.","Pour into glasses. Serve cold, or cover and refrigerate promptly until ready to drink."],tips:["Use chilled peaches and milk for a colder drink without watering it down.","Shake or stir before serving if it separates while standing.","Keep refrigerated and enjoy within 1–2 days."]}
 ];
+type Nutrition = {kcal:number;protein:number;carbs:number;fat:number};
+const nutritionPer100g = (ingredient:string):Nutrition => {
+ const x=ingredient.toLowerCase();
+ if(x.includes("drumstick")) return {kcal:115,protein:16,fat:6,carbs:0};
+ if(x.includes("chicken")) return {kcal:165,protein:20,fat:9,carbs:0};
+ if(x.includes("ground beef")) return {kcal:254,protein:17,fat:20,carbs:0};
+ if(x.includes("pasta")||x.includes("dry pasta")) return {kcal:371,protein:13,fat:1.5,carbs:75};
+ if(x.includes("rice")) return {kcal:365,protein:7,fat:0.7,carbs:80};
+ if(x.includes("vegetable")) return {kcal:50,protein:2.5,fat:0.5,carbs:10};
+ if(x.includes("oil")) return {kcal:884,protein:0,fat:100,carbs:0};
+ if(x.includes("milk")) return {kcal:50,protein:3.4,fat:2,carbs:5};
+ if(x.includes("yogurt")||x.includes("yoghurt")) return {kcal:65,protein:4,fat:3.5,carbs:5};
+ if(x.includes("banana")) return {kcal:89,protein:1.1,fat:0.3,carbs:23};
+ if(x.includes("peanut butter")) return {kcal:588,protein:25,fat:50,carbs:20};
+ if(x.includes("oat")) return {kcal:389,protein:17,fat:7,carbs:66};
+ if(x.includes("honey")) return {kcal:304,protein:0.3,fat:0,carbs:82};
+ if(x.includes("granola")||x.includes("muesli")) return {kcal:450,protein:10,fat:15,carbs:65};
+ if(x.includes("apple")) return {kcal:52,protein:0.3,fat:0.2,carbs:14};
+ if(x.includes("berr")) return {kcal:50,protein:0.7,fat:0.3,carbs:12};
+ if(x.includes("chocolate")) return {kcal:550,protein:5,fat:35,carbs:55};
+ if(x.includes("peach")) return {kcal:60,protein:0.5,fat:0.1,carbs:15};
+ if(x.includes("parmesan")) return {kcal:431,protein:38,fat:29,carbs:4};
+ if(x.includes("cheddar")||x.includes("cheese")) return {kcal:400,protein:25,fat:33,carbs:1};
+ if(x.includes("tomato")||x.includes("sauce")) return {kcal:70,protein:2,fat:2,carbs:10};
+ if(x.includes("granola")) return {kcal:450,protein:10,fat:15,carbs:65};
+ if(x.includes("paprika")||x.includes("garlic powder")||x.includes("onion powder")||x.includes("cinnamon")) return {kcal:300,protein:10,fat:5,carbs:60};
+ if(x.includes("salt")||x.includes("pepper")||x.includes("vanilla")||x.includes("ice")||x.includes("water")) return {kcal:0,protein:0,fat:0,carbs:0};
+ return {kcal:250,protein:8,fat:10,carbs:30};
+};
+const round1=(n:number)=>Math.round(n*10)/10;
 const readSessions = (): Session[] => { try { return JSON.parse(localStorage.getItem("adonis-workout-history") || "[]"); } catch { return []; } };
 const todayName = () => new Date().toLocaleDateString("en-CA",{weekday:"long"});
 const blankSets = (e:Exercise):SetEntry[] => Array.from({length:e.sets},()=>({reps:e.reps.split("–")[0],weight:"",done:false}));
@@ -45,21 +75,27 @@ export function RecipeLibrary() {
  const [selected,setSelected]=useState<number|null>(null);
  const [checked,setChecked]=useState<string[]>([]);
  const [finishedSteps,setFinishedSteps]=useState<number[]>([]);
- const [nutritionWeight,setNutritionWeight]=useState("186");
- const [boneIn,setBoneIn]=useState(true);
+ const [weights,setWeights]=useState<Record<string,string>>({});
  const recipe=selected===null?null:recipes[selected];
  const toggle=(value:string)=>setChecked(prev=>prev.includes(value)?prev.filter(x=>x!==value):[...prev,value]);
- const reset=()=>{setSelected(null);setChecked([]);setFinishedSteps([]);};
- return <><div className="page-head"><div><p className="eyebrow">FUEL YOUR DAY</p><h1>Food & recipes</h1><p className="muted">Detailed recipes with measured ingredients, equipment, clear cooking steps and practical tips.</p></div></div>
+ const reset=()=>{setSelected(null);setChecked([]);setFinishedSteps([]);setWeights({});};
+ const nutritionRows=recipe?recipe.ingredients.map((name,i)=>{const key=selected+"-"+i;const grams=Math.max(0,Number(weights[key]||0));const per=nutritionPer100g(name);return {key,name,grams,per,kcal:per.kcal*grams/100,protein:per.protein*grams/100,carbs:per.carbs*grams/100,fat:per.fat*grams/100};}):[];
+ const total=nutritionRows.reduce((v,r)=>({kcal:v.kcal+r.kcal,protein:v.protein+r.protein,carbs:v.carbs+r.carbs,fat:v.fat+r.fat}),{kcal:0,protein:0,carbs:0,fat:0});
+ return <><div className="page-head"><div><p className="eyebrow">FUEL YOUR DAY</p><h1>Food & recipes</h1><p className="muted">Detailed recipes with measured ingredients, clear cooking steps and practical tips.</p></div></div>
  {recipe?<><button className="secondary-btn recipe-back" onClick={reset}>← All recipes</button>
  <section className="panel recipe-detail">
  <div className="recipe-detail-head"><span className="tag">{recipe.category} · {recipe.level}</span><h2 className="recipe-detail-title">{recipe.name}</h2><p className="muted small">{recipe.description}</p>
  <div className="recipe-facts"><div><small>Total time</small><b>{recipe.time}</b></div><div><small>Prep</small><b>{recipe.prep}</b></div><div><small>Cook</small><b>{recipe.cook}</b></div><div><small>Makes</small><b>{recipe.servings}</b></div></div></div>
  <div className="recipe-section"><div className="recipe-section-title"><h3>Ingredients</h3><span>{checked.length}/{recipe.ingredients.length} ready</span></div><p className="muted small">Check each item as you get it ready.</p><div className="recipe-check-progress"><span style={{width:(checked.length/recipe.ingredients.length*100)+"%"}}/></div><div className="ingredient-list">{recipe.ingredients.map(item=><button className={checked.includes(item)?"ingredient checked":"ingredient"} key={item} onClick={()=>toggle(item)}><span>{checked.includes(item)?"✓":""}</span>{item}</button>)}</div></div>
- {recipe.name.toLowerCase().includes("chicken")&&<div className="recipe-section nutrition-estimator"><div className="recipe-section-title"><h3>Chicken nutrition estimator</h3><span>Approximate</span></div><p className="muted small">Enter the raw weight in grams. Choose whether the weight includes the bone.</p><label className="nutrition-weight-label">Weight (grams)<input type="number" min="1" max="5000" inputMode="decimal" value={nutritionWeight} onChange={e=>setNutritionWeight(e.target.value)} placeholder="e.g. 186"/></label><div className="nutrition-toggle"><button className={boneIn?"selected":""} onClick={()=>setBoneIn(true)}>Bone-in weight</button><button className={!boneIn?"selected":""} onClick={()=>setBoneIn(false)}>Meat only</button></div>{(()=>{const w=Number(nutritionWeight);const edible=w>0&&Number.isFinite(w)?w*(boneIn?0.70:1):0;const factor=edible/100;return <div className="nutrition-results"><div className="nutrition-result-main"><small>Estimated edible portion</small><b>{Math.round(edible)} g</b></div><div className="nutrition-result-grid"><div><small>Energy</small><b>{Math.round(161*factor)} kcal</b></div><div><small>Protein</small><b>{(18.08*factor).toFixed(1)} g</b></div><div><small>Fat</small><b>{(9.2*factor).toFixed(1)} g</b></div><div><small>Carbs</small><b>{(0.11*factor).toFixed(1)} g</b></div></div><p className="muted small">Estimate based on raw drumstick meat and skin per 100 g edible portion. Bone-in mode assumes about 70% edible meat and skin; actual yield varies with drumstick size and trimming. Seasonings, sauces and cooking oil are not included.</p></div>})()}</div>}<div className="recipe-section"><h3>Equipment</h3><div className="equipment-list">{recipe.equipment.map(item=><span key={item}>{item}</span>)}</div></div>
+ <div className="recipe-section nutrition-section"><div className="recipe-section-title"><h3>Nutrition estimator</h3><span>Per ingredient</span></div><p className="muted small">Enter the edible weight in grams for each ingredient. Estimates update automatically. For packaged foods, use the nutrition label for the best estimate.</p>
+ <div className="nutrition-table"><div className="nutrition-head"><span>Ingredient</span><span>Weight (g)</span><span>Calories</span><span>Protein</span><span>Carbs</span><span>Fat</span></div>
+ {nutritionRows.map(r=><div className="nutrition-row" key={r.key}><div className="nutrition-name">{r.name}<small>Default per 100 g: {r.per.kcal} kcal · P {r.per.protein} g · C {r.per.carbs} g · F {r.per.fat} g</small></div><input aria-label={r.name+" weight in grams"} type="number" min="0" step="1" placeholder="0" value={weights[r.key]||""} onChange={e=>setWeights(prev=>({...prev,[r.key]:e.target.value}))}/><b>{Math.round(r.kcal)}</b><span>{round1(r.protein)} g</span><span>{round1(r.carbs)} g</span><span>{round1(r.fat)} g</span></div>)}
+ </div><div className="nutrition-total"><b>Entered ingredients total</b><strong>{Math.round(total.kcal)} kcal</strong><span>Protein {round1(total.protein)} g</span><span>Carbs {round1(total.carbs)} g</span><span>Fat {round1(total.fat)} g</span></div>
+ <p className="muted small">These are rough estimates, not medical or exact lab values. The built-in values are generic averages and may differ by brand, cut, cooking method and whether a weight includes bone. For bone-in chicken, enter the edible meat/skin weight only. Salt, water and ice contribute little or no energy; sauces and seasonings can vary.</p></div>
+ <div className="recipe-section"><h3>Equipment</h3><div className="equipment-list">{recipe.equipment.map(item=><span key={item}>{item}</span>)}</div></div>
  <div className="recipe-section"><div className="recipe-section-title"><h3>Cooking instructions</h3><span>{finishedSteps.length}/{recipe.steps.length} steps done</span></div><p className="muted small">Work through the steps in order and tap each one when finished.</p><div className="recipe-check-progress"><span style={{width:(finishedSteps.length/recipe.steps.length*100)+"%"}}/></div><ol className="recipe-steps">{recipe.steps.map((step,i)=><li className={finishedSteps.includes(i)?"step-finished":""} key={i}><button aria-label={finishedSteps.includes(i)?"Mark step incomplete":"Mark step complete"} onClick={()=>setFinishedSteps(prev=>prev.includes(i)?prev.filter(x=>x!==i):[...prev,i])}>{finishedSteps.includes(i)?"✓":i+1}</button><p>{step}</p></li>)}</ol></div>
  <div className="recipe-section recipe-tips"><h3>Chef's tips</h3><ul>{recipe.tips.map(tip=><li key={tip}>{tip}</li>)}</ul></div>
  <p className="recipe-safety-note">Kitchen safety: use care with boiling water and hot pans. Wash hands and surfaces after handling raw meat, keep raw and cooked foods separate, and use a food thermometer for chicken.</p>
- </section></>:<><div className="recipe-grid">{recipes.map((r,i)=><button className="recipe-tile" key={r.name} onClick={()=>{setSelected(i);setChecked([]);setFinishedSteps([]);}}><div className="recipe-tile-icon"><Utensils size={20}/></div><div><b>{r.name}</b><small>{r.category} · {r.time}</small></div><span>{r.servings} · View recipe →</span></button>)}</div><p className="muted small recipe-library-note">Choose any recipe to see exact starting quantities, tools, preparation and cooking times, step-by-step instructions, and tips. Adjust portions to your appetite and household needs.</p></>}
+ </section></>:<><div className="recipe-grid">{recipes.map((r,i)=><button className="recipe-tile" key={r.name} onClick={()=>{setSelected(i);setChecked([]);setFinishedSteps([]);setWeights({});}}><div className="recipe-tile-icon"><Utensils size={20}/></div><div><b>{r.name}</b><small>{r.category} · {r.time}</small></div><span>{r.servings} · View recipe →</span></button>)}</div><p className="muted small recipe-library-note">Choose any recipe to see quantities, equipment, nutrition estimates, step-by-step instructions and tips.</p></>}
  </>;
 }
