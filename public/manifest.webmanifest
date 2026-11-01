@@ -10,7 +10,7 @@
   "theme_color": "#080808",
   "icons": [
     {
-      "src": "/project-adonis/icon.svg",
+      "src": "/project-adonis/icon-v2.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
