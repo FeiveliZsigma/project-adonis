@@ -65,3 +65,82 @@
 .nutrition-total strong{font-size:13px;color:#b9edc2}
 .nutrition-total span{color:#a9bcae}
 @media(max-width:600px){.nutrition-total{gap:8px}.nutrition-total b{width:100%}}
+
+
+/* MIDNIGHT COMMAND THEME — full interface */
+:root{
+  color-scheme:dark;
+  --bg:#080e19;--panel:#111c2d;--panel2:#17263b;--line:#263b57;
+  --muted:#8fa7c8;--green:#a9c9f5;--green2:#48c8e8;--white:#eaf2ff;
+}
+body,.app-shell{background:#080e19!important;color:#eaf2ff}
+.sidebar{background:#0b1422!important;border-color:#1e3049!important}
+.brand-mark,.profile-avatar,.avatar,.stat-icon,.emblem{background:#1b3552!important;color:#a9d7ff!important;border-color:#42678e!important}
+.brand small,.profile-card small,.nav-label,.sidebar-foot,.today-label,.crumb,.muted,.stat-card small,.stat-foot,.week-day small,.week-legend,.hero-bottom span,.schedule-row span{color:#8fa7c8!important}
+.online-dot,.live-dot{background:#48c8e8!important;box-shadow:0 0 10px #48c8e866!important}
+.profile-card,.streak-card,.panel,.stat-card,.phase-card,.recipe-card,.verse-card,.best-item,.workout-set,.phone-setup{background:#111c2d!important;border-color:#263b57!important}
+.nav-item{color:#9fb4d1!important}
+.nav-item:hover,.nav-item.active{background:#1a2c44!important;color:#a9d7ff!important}
+.nav-item i{background:#48c8e8!important}
+.streak-card,.bottom-quote,.challenge,.phone-setup,.training-day.rest-day{background:#14243a!important;border-color:#294765!important;color:#b8d9ff!important}
+.streak-icon,.icon-heading,.score,.text-btn,.eyebrow,.phase-number,.focus-label,.method b,.training-day>b,.recipe-card>b,.motivation-section-title,.workout-exercise .exercise-heading b,.schedule-row time{color:#8bdcf3!important}
+.topbar{background:#0b1422!important;border-color:#1e3049!important}
+.hero{background:radial-gradient(ellipse at 78% 45%,#24496a 0%,#172d48 38%,#101d30 76%)!important;border-color:#315879!important}
+.hero:after{background:linear-gradient(110deg,#101d30 0%,transparent 70%)!important}
+.tag{background:#193b56!important;border-color:#376786!important;color:#a9eaff!important}
+.hero-line{background:#29435e!important}
+.hero-line span,.progress span,.recipe-check-progress span{background:linear-gradient(90deg,#287da9,#48c8e8)!important}
+.ring,.orbit{border-color:#55bde766!important;color:#a9eaff!important}
+.ring-two{border-color:#8bdcf344!important}
+.emblem{background:linear-gradient(145deg,#24547a,#142a45)!important;box-shadow:0 15px 50px #0008!important}
+.art-caption{color:#a9d7ff!important}
+.stat-icon{background:#1b3552!important;color:#68d5f0!important}
+.score,.big-progress b{color:#8bdcf3!important}
+.text-btn{color:#8bdcf3!important}
+.check{border-color:#42617e!important}
+.check.checked,.is-done .check{background:#48c8e8!important;border-color:#48c8e8!important;color:#071521!important}
+.primary-btn,.timer-options button.selected,.workout-day-tabs button.selected,.set-check.checked{background:#48c8e8!important;border-color:#48c8e8!important;color:#071521!important}
+.secondary-btn,.timer-options button,.workout-day-tabs button,.set-check{background:#172a42!important;border-color:#365574!important;color:#b9d8f4!important}
+.week-bars .bar-bg{background:#1b2c42!important}
+.week-bars .bar-bg span,.skill-track i{background:linear-gradient(180deg,#8bdcf3,#287da9)!important}
+.week-legend i{background:#48c8e8!important}
+.date-chip,.day-pill{border-color:#2b4562!important;color:#b9d8f4!important}
+.day-pill{color:#8bdcf3!important}
+.progress{background:#263b57!important}
+.habit-row,.mini-row,.schedule-row,.skill,.method,.training-day,.workout-exercise{border-color:#263b57!important}
+.habit-row,.mini-row{color:#e0ebfa!important}
+.habit-copy small,.subtle,.exercise-heading small{color:#8fa7c8!important}
+.is-done .habit-copy b{color:#8298b4!important}
+.phase-status{background:#1b3552!important;color:#a9d7ff!important}
+.focus-card{background:radial-gradient(circle at 50% 25%,#1d3e5c,#101d30 68%)!important;border-color:#315879!important}
+.timer{color:#eaf2ff!important}
+.method b,.note-panel h2,.icon-heading{color:#8bdcf3!important}
+.skill-track{background:#263b57!important}
+textarea{background:#0c1726!important;border-color:#365574!important;color:#eaf2ff!important}
+textarea:focus{outline-color:#48c8e8!important}
+.challenge{background:#14243a!important;border-color:#294765!important;color:#b9d8f4!important}
+.training-day.rest-day{background:#14243a!important}
+.motivation-hero{background:radial-gradient(ellipse at 85% 20%,#285a7866,transparent 45%),linear-gradient(130deg,#14263b,#101d30 70%)!important;border-color:#315879!important}
+.motivation-kicker,.motivation-hero h2,.ronaldo-principles b{color:#a9eaff!important}
+.motivation-hero>p,.ronaldo-principles span{color:#b5c9e2!important}
+.ronaldo-principles div{background:#172a42!important;border-color:#315879!important}
+.verse-card{background:linear-gradient(145deg,#172a42,#111c2d)!important;border-color:#2b4562!important}
+.verse-card>span{color:#8bdcf3!important}
+.verse-card p{color:#eaf2ff!important}
+.motivation-reminder{border-color:#315879!important}
+.motivation-reminder h2{color:#a9eaff!important}
+.motivation-reminder p{color:#b5c9e2!important}
+.workout-day-tabs button,.workout-set input{background:#0c1726!important;border-color:#365574!important;color:#eaf2ff!important}
+.workout-set.set-done{background:#142a3e!important;border-color:#367da0!important}
+.set-number{color:#8bdcf3!important}
+.rest-panel{background:#14243a!important;border-color:#315879!important;color:#a9eaff!important}
+.best-item{background:#14243a!important;border-color:#315879!important}
+.recipe-tile,.recipe-detail,.recipe-section,.nutrition-total,.recipe-facts>div,.equipment-list span{background:#111c2d!important;border-color:#263b57!important;color:#eaf2ff!important}
+.recipe-tile-icon{background:#1b3552!important;color:#8bdcf3!important}
+.recipe-detail-title,.recipe-section h3{color:#eaf2ff!important}
+.recipe-section-title span,.nutrition-name small,.recipe-safety-note{color:#8fa7c8!important}
+.ingredient,.recipe-steps li,.nutrition-row,.nutrition-head{border-color:#263b57!important;color:#d9e6f7!important}
+.ingredient.checked{background:#142a3e!important;color:#a9d7ff!important}
+.toast{background:#48c8e8!important;color:#071521!important}
+footer span{color:#48c8e8!important}
+.icon-btn,.menu-btn{border-color:#2b4562!important;color:#a9d7ff!important}
