@@ -1,4 +1,4 @@
-const CACHE_NAME = "adonis-shell-v3";
+const CACHE_NAME = "adonis-shell-v4";
 const APP_BASE = "/project-adonis/";
 const CORE_ASSETS = [
   APP_BASE,
