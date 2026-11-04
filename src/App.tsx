@@ -27,6 +27,7 @@ const habits: Habit[] = [
   {id:"reading",label:"Read 10 pages",category:"Growth",time:"Daily"},
   {id:"journal",label:"Write tomorrow’s goals and gratitude",category:"Reflection",time:"Before bed"},
   {id:"social-limit",label:"Keep social media within my limit",category:"Focus",time:"Daily"},
+  {id:"gnprn-quit",label:"GNPRN QUIT",category:"Focus",time:"Daily"},
   {id:"morning-phone",label:"No social media during my first hour",category:"Focus",time:"Morning"},
   {id:"no-snooze",label:"Get up without snoozing",category:"Discipline",time:"Morning"},
   {id:"morning-goals",label:"Write today’s goals on paper",category:"Discipline",time:"After waking up"}
